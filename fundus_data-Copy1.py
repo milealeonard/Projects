@@ -35,6 +35,7 @@ from PIL import Image
 import random as random
 import cv2 as cv2
 
+# In[2]:
 
 dim_x, dim_y = 224, 224  #read and resize images to this dimension
 
