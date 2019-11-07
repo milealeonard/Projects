@@ -56,10 +56,10 @@ class Main_Menu (wx.Panel):
     def initiate_widgets(self, parent):
         self.user_slct = wx.TextCtrl (self, size = (245, -1))
         self.user_slct.Bind (wx.EVT_KEY_DOWN, self.user_selection)
-        self.user_slct.SetValue("Type Username Here, then Press Enter")
+        self.user_slct.SetValue("Type Username Here, then Press Enter!")
         self.name_box = wx.TextCtrl (self, size = (210, -1))
         self.name_box.Bind (wx.EVT_KEY_DOWN, self.rename_func)
-        self.name_box.SetValue("Type File Name, then Press Enter")
+        self.name_box.SetValue("Type File Name, then Press Enter!")
         self.name_box.Hide()
         self.next_frame = wx.Button (self, label = "Next")
         self.next_frame.Bind(wx.EVT_BUTTON, parent.one_to_two)

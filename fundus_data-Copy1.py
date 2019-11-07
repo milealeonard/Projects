@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 import os as os
 from os import environ
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID" 
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"]="3"
 
 from tensorflow.keras.models import Sequential, load_model, Model
@@ -36,15 +36,12 @@ import random as random
 import cv2 as cv2
 
 
-# In[2]:
-
-
 dim_x, dim_y = 224, 224  #read and resize images to this dimension
 
 path_segmentation = ["/home/leo/Segmentation/Vessels/STARE",
                      "/home/leo/Segmentation/Vessels/HRF",
                      "/home/leo/Segmentation/Vessels/DRIVE"]
-                     
+
 
 
 # In[4]:
@@ -56,16 +53,16 @@ for path_current in path_segmentation:
     study = path_current.split("/")[-1]
     print("--->", study)
     path_raw = path_current + "/raw"
-    image_files = [f for f in listdir(path_raw) if isfile(join(path_raw, f)) 
-                                       and (f.endswith(".jpg") 
-                                            or f.endswith(".JPG") 
+    image_files = [f for f in listdir(path_raw) if isfile(join(path_raw, f))
+                                       and (f.endswith(".jpg")
+                                            or f.endswith(".JPG")
                                             or f.endswith(".tif")
                                             or f.endswith(".ppm"))]
     path_seg = path_current + "/segmentation"
     seg_files = [f for f in listdir(path_seg) if isfile(join(path_seg, f))
-                                         and (f.endswith(".jpg") 
-                                              or f.endswith(".JPG") 
-                                              or f.endswith(".tif") 
+                                         and (f.endswith(".jpg")
+                                              or f.endswith(".JPG")
+                                              or f.endswith(".tif")
                                               or f.endswith(".ppm")
                                               or f.endswith(".gif"))]
     for f in image_files:
@@ -74,27 +71,27 @@ for path_current in path_segmentation:
         #explore the segmentation folder and check if there is a corresponding file
         for f_seg in seg_files:
             start_file_seg = f_seg.split(".")[0] #extract the name of the file without extension
-            if start_file_raw == start_file_seg:          
+            if start_file_raw == start_file_seg:
                 image_raw = Image.open(join(path_raw, f))
-                image_raw = image_raw.resize((dim_x, dim_y), Image.ANTIALIAS) #resize        
+                image_raw = image_raw.resize((dim_x, dim_y), Image.ANTIALIAS) #resize
                 image_raw = np.array(image_raw) #transform to Numpy
 
                 image_seg = Image.open(join(path_seg, f_seg))
-                image_seg = image_seg.resize((dim_x, dim_y), Image.ANTIALIAS) #resize        
+                image_seg = image_seg.resize((dim_x, dim_y), Image.ANTIALIAS) #resize
                 image_seg = np.array(image_seg) #transform to Numpy
-                
+
                 print("raw file: {} \t \t segmentation file: {}".format(f, f_seg))
                 segmentation_data.append([image_raw, image_seg, study])
                 break
-        
-        
-    
+
+
+
 
 
 # In[5]:
 
 
-def create_mask(study): 
+def create_mask(study):
     """
     according to the study, work out the region of interest
     """
@@ -137,7 +134,7 @@ nrow = 3
 plt.rcParams['figure.figsize'] = (ncol*3*2, nrow*3)
 for k in range(ncol*nrow):
     study = segmentation_data[k][2]
-    
+
     plt.subplot(nrow, ncol*2,2*k+1)
     raw = segmentation_data[k][0]
     raw_green = raw[:,:,1].astype(float)
@@ -152,10 +149,10 @@ for k in range(ncol*nrow):
     data_seg = np.copy(data_seg_)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2,2))
     data_seg = cv2.dilate(data_seg.astype(np.uint8),kernel,iterations = 1)
-    
+
     mask = create_mask(study)
     data_seg[mask]=0
-    
+
     plt.imshow(data_seg, cmap="gray", alpha=1)
     plt.axis("Off")
 
@@ -180,7 +177,7 @@ for k in range(n_train):
     x_train, y_train = segmentation_data[k][0], segmentation_data[k][1]
     x_train = x_train / 255.
     y_seg = y_train / float(np.max(y_train))
-    y_seg = (y_seg> 0.5).astype(int)    
+    y_seg = (y_seg> 0.5).astype(int)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
     data_seg = cv2.dilate(y_seg.astype(np.uint8),kernel,iterations = 1)
     X_train[k,:,:,:] = np.copy(x_train)
@@ -193,7 +190,7 @@ for k in range(n_test):
     x_test, y_test = segmentation_data[n_train + k][0], segmentation_data[n_train + k][1]
     x_test = x_test / 255.
     y_seg = y_test / float(np.max(y_test))
-    y_seg = (y_seg> 0.5).astype(int)    
+    y_seg = (y_seg> 0.5).astype(int)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2,2))
     data_seg = cv2.dilate(y_seg.astype(np.uint8),kernel,iterations = 1)
     X_test[k,:,:,:] = x_test
@@ -246,16 +243,16 @@ def DataGen(X, y, batch_sz):
     elastic transformation, rotation, pixel inetensity change, and all that
     """
     #alpha, alpha2, sigma = 10, 15, 50
-    
+
     c = list(zip(X, y))
     #croph, cropw = crop_H, crop_W
-    
+
     dim_x, dim_y, n_channel = X[0].shape
-    
+
     #x_mesh, y_mesh = np.meshgrid(np.arange(shape[1]), np.arange(shape[0]))
 
     Xpatches = np.ndarray((batch_sz, dim_x, dim_y, 1), dtype=np.float32)
-    ypatches = np.ndarray((batch_sz, dim_x, dim_y, 3), dtype=np.float32) 
+    ypatches = np.ndarray((batch_sz, dim_x, dim_y, 3), dtype=np.float32)
 
     #create a mask for later purposes
     #black_dx = 60
@@ -263,7 +260,7 @@ def DataGen(X, y, batch_sz):
     #dark_mask = np.zeros((black_dx, black_dy))
     #for k in range(black_dy):
     #    dark_mask[:,k] = (np.abs(k-black_dy//2) / (black_dy/2.))**2
-            
+
     image_index = 0
     batch_index = 0
     while True:
@@ -275,13 +272,13 @@ def DataGen(X, y, batch_sz):
         #if all images have been seen, start again from the beginning
         if image_index >= len(X):
             image_index = 0
-            
+
         #do the following at the start of each epoch
         if image_index == 0:
-            #shuffle the data 
+            #shuffle the data
             random.shuffle(c)
             X, y = zip(*c)
-            
+
             #below is used once per epoch for the elastic deformation
             #g_1d = signal.gaussian(300, sigma)
             #kernel_deform = np.outer(g_1d, g_1d)
@@ -293,7 +290,7 @@ def DataGen(X, y, batch_sz):
             #indices_x_clipped = np.clip(indices_x, a_min=0, a_max=shape[1]-1)
             #indices_y_clipped = np.clip(indices_y, a_min=0, a_max=shape[0]-1)
 
-                        
+
         #img_height, img_width = X[image_index].shape[:-1]
         ax = np.zeros((dim_x, dim_y, n_channel))
         ay = np.zeros((dim_x, dim_y))
@@ -304,7 +301,7 @@ def DataGen(X, y, batch_sz):
         if random.randint(0, 1):
             ax = ax[:, ::-1, :]
             ay = ay[:, ::-1]
-            
+
         #rotation + zoom
         if True:
             angle = np.random.uniform(low=0., high=360.)
@@ -313,7 +310,7 @@ def DataGen(X, y, batch_sz):
             ax = cv2.warpAffine(ax,transform_matrix,(dim_x, dim_y), flags = cv2.INTER_NEAREST)
             ay = cv2.warpAffine(ay,transform_matrix,(dim_x, dim_y), flags = cv2.INTER_NEAREST)
 
-    
+
 
         #Intensity nonlinear shift
         if True:
@@ -352,30 +349,30 @@ def DataGen(X, y, batch_sz):
         ax = np.clip(ax, 0., 1.)
         #ay = np.clip(ay, 0., 1.)
         ay = ay.astype(int)
-        
+
         raw_img = (255*ax).astype(np.uint8)
         b,green_fundus,r = cv2.split(raw_img)
         ax = clahe.apply(green_fundus) / 255.
         ax = np.clip(ax, 0., 1.)
-    
+
         Xpatches[batch_index,:,:,0] = ax
-        
+
         ypatches[batch_index] = 0.
         ypatches[batch_index,ay==0,0] = 1
         ypatches[batch_index,ay==1,1] = 1
         ypatches[batch_index,ay==2,2] = 1
 
-        
-        
+
+
         batch_index = batch_index + 1
         image_index = image_index + 1
-        
+
 
 
 # In[33]:
 
 
-# Generate augmentation 
+# Generate augmentation
 batch_sz = 10
 training_gen, val_gen = DataGen(X_train, Y_train, batch_sz), DataGen(X_test, Y_test, batch_sz)
 im,seg = next(training_gen)
@@ -401,7 +398,7 @@ for k in range(ncol * nrow):
     #plt.imshow(contrast_enhanced_green_fundus)
     plt.imshow(im[k,:,:,0])
     plt.axis("off")
-    
+
     plt.subplot(nrow, ncol*2,2*k+2)
     plt.imshow(seg[k,:,:,:], cmap='gray')
     plt.axis("off")
@@ -423,7 +420,7 @@ def standard_blocks(layer_input, nb_filters, conv_size, dillatation, nb_blocks):
     for _ in range(nb_blocks-1):
         y = Conv2D(nb_filters, conv_size, dilation_rate = dillatation, padding='same')(y)
         #y = BatchNormalization()(y)
-        y = Activation('elu')(y) 
+        y = Activation('elu')(y)
     return y
 
 def residual_blocks(layer_input, nb_filters, conv_size, dillatation, nb_blocks):
@@ -434,38 +431,38 @@ def residual_blocks(layer_input, nb_filters, conv_size, dillatation, nb_blocks):
     for _ in range(nb_blocks-1):
         y = Conv2D(nb_filters, conv_size, dilation_rate = dillatation, padding='same')(y)
         #y = BatchNormalization()(y)
-        y = Activation('elu')(y) 
+        y = Activation('elu')(y)
     y = layers.add([y, residual])
     return y
 
 def basic_unet(dim_x, dim_y, nb_classes):
     inputs = Input((dim_x, dim_y, 1))
     #
-    conv1 = standard_blocks(layer_input = inputs, nb_filters = 16, conv_size = (3,3), 
+    conv1 = standard_blocks(layer_input = inputs, nb_filters = 16, conv_size = (3,3),
                                   dillatation = 1, nb_blocks=2)
     pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
     #
-    conv2 = residual_blocks(layer_input = pool1, nb_filters = 32, conv_size = (3,3), 
+    conv2 = residual_blocks(layer_input = pool1, nb_filters = 32, conv_size = (3,3),
                                   dillatation = 1, nb_blocks=2)
     pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
     #
-    conv3 = residual_blocks(layer_input = pool2, nb_filters = 64, conv_size = (3,3), 
-                                  dillatation = 1, nb_blocks=2) 
+    conv3 = residual_blocks(layer_input = pool2, nb_filters = 64, conv_size = (3,3),
+                                  dillatation = 1, nb_blocks=2)
     #pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
     #
-    #conv5 = residual_blocks(layer_input = pool3, nb_filters = 64, conv_size = (3,3), 
-    #                              dillatation = 1, nb_blocks=2) 
-     
+    #conv5 = residual_blocks(layer_input = pool3, nb_filters = 64, conv_size = (3,3),
+    #                              dillatation = 1, nb_blocks=2)
+
     #up7 = concatenate([UpSampling2D()(conv5), conv3], axis=3)
-    #conv7 = residual_blocks(layer_input = up7, nb_filters = 32, conv_size = (3,3), 
+    #conv7 = residual_blocks(layer_input = up7, nb_filters = 32, conv_size = (3,3),
     #                             dillatation = 1, nb_blocks=2)
-    
+
     up8 = concatenate([UpSampling2D()(conv3), conv2], axis=3)
-    conv8 = residual_blocks(layer_input = up8, nb_filters = 16, conv_size = (3,3), 
+    conv8 = residual_blocks(layer_input = up8, nb_filters = 16, conv_size = (3,3),
                                   dillatation = 1, nb_blocks=2)
     #
     up9 = concatenate([UpSampling2D()(conv8), conv1], axis=3)
-    conv9 = residual_blocks(layer_input = up9, nb_filters = 16, conv_size = (3,3), 
+    conv9 = residual_blocks(layer_input = up9, nb_filters = 16, conv_size = (3,3),
                                   dillatation = 1, nb_blocks=2)
     #
     conv10 = Conv2D(nb_classes, (1, 1))(conv9)
@@ -488,10 +485,10 @@ def create_basic_unet():
     model = basic_unet(dim_x, dim_y, nb_classes)
     #model.compile(optimizer=adam, loss=jacc_coeff_loss)
     model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
-    
+
     #model.compile(optimizer=sgd, loss=jacc_coeff_loss, metrics=['accuracy'],loss_weights=[0.4])
     print('Model compiled.')
-    
+
     return model
 
 
@@ -511,7 +508,7 @@ num_train_batches, num_val_batches = len(X_train) // train_mini_batch_sz, len(X_
 training_gen = DataGen(X_train, Y_train, train_mini_batch_sz)
 val_gen = DataGen(X_test, Y_test, train_mini_batch_sz)
 
-       
+
 
 
 # In[43]:
@@ -521,8 +518,8 @@ epochs=200
 #with tf.device('/gpu:3'):
 fit_history = model.fit_generator(generator=training_gen,
                     steps_per_epoch=num_train_batches,
-                    epochs=epochs, 
-                    validation_data=val_gen, 
+                    epochs=epochs,
+                    validation_data=val_gen,
                     validation_steps=num_val_batches,
                     verbose=1, use_multiprocessing=True)
 
@@ -573,7 +570,7 @@ for k in range(ncol * nrow):
     #plt.imshow(contrast_enhanced_green_fundus)
     plt.imshow(im[k,:,:,0])
     plt.axis("off")
-    
+
     plt.subplot(nrow, ncol*2,2*k+2)
     seg_map = np.argmax(seg_val[k], axis=2)==2
     seg_map = reduce_spluttering(seg_map, threshold = 50)
@@ -628,7 +625,3 @@ print("Loaded model from disk")
 
 
 # In[ ]:
-
-
-
-
