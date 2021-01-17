@@ -1,0 +1,339 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Big Shoulders Stencil Display', cursive;
+  letter-spacing: 0.1rem;
+}
+
+.checkmark {
+  min-width: 5vw;
+  height: 3vh;
+  /* border: 1px solid white; */
+  display: inline;
+  /* visibility: hidden; */
+}
+#checkmark1, #checkmark2, #checkmark3 {
+  max-width: 5vh;
+  max-height: 5vh;
+}
+
+.usernameClass, .excelnameClass, .step3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+body {
+  background: black;
+  font-family: 'Big Shoulders Stencil Display', cursive;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 178, 54, 85%);
+  font-size: 3rem;
+  font-weight: 300;
+  /* letter-spacing: 0.5rem; */
+  width: 100vw;
+  height: 15vh;
+  font-family: "Libre Baskerville", cursive;
+  /* background: linear-gradient(to bottom, rgba(255, 255, 255, 30%), black); */
+}
+.title > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pageOne > * {
+  margin: 1%;
+}
+.image {
+  width: 50%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 15%;
+  left: 24.5%;
+  /* border: 1px solid yellow; */
+}
+
+.buttons {
+  position: absolute;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  margin: 0;
+  margin-left: 5%;
+  padding: 0;
+  /* border: 1px solid white; */
+  height: 70vh;
+  z-index: -1;
+}
+
+.prevButtonPage3To2 {
+  position: absolute;
+  top: 2vh;
+  left: 3vw;
+  /* border: 1px solid yellow; */
+  z-index: 2;
+}
+.prevButtonPage2To1 {
+  position: absolute;
+  top: 2vh;
+  left: 3vw;
+  /* border: 1px solid yellow; */
+  z-index: 2;
+}
+
+.fakeButton {
+  margin-right: 30px;
+  padding: 0 30px;
+  /* border: 1px solid white; */
+}
+.downloadButton {
+  position: absolute;
+  top: 10%;
+  right: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  margin: 0;
+  margin-right: 5%;
+  padding: 0;
+  /* border: 1px solid white; */
+  height: 70vh;
+}
+.inpClass {
+  display: inline-block;
+  width: 100%;
+  /* padding: 120px 0 0 0; */
+  height: 1px;
+  /* top: 1000000px; */
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.warnings {
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* top: 72%; */
+  margin-top: 1rem;
+  /* border: 1px solid white; */
+  min-height: 20vh;
+  font-family: 'Montserrat', sans-serif;
+  color: #f07816;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+.warnings > div {
+  color: #f07816;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0.5rem 0;
+}
+
+#error4 {
+  text-align: center;
+}
+.error4Container {
+  min-height: 23vh;
+  /* border: 1px solid white; */
+}
+.nextPage1 {
+  margin-top: 1%;
+}
+button {
+  background-color: transparent;
+  border: 0;
+  color: rgba(254, 251, 239, 0.6);
+  /* font-family: 'Open Sans', sans-serif; */
+  font-weight: 600;
+  margin: 10px;
+  font-size: 2rem;
+   /* width: 100%; /* Large, mobile-friendly touch target */
+   /* transition: 0.8s cubic-bezier(0, 1, 0, 1); */
+}
+
+button:hover {
+  color: rgba(254, 251, 239, 0.95);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.bottombuttons {
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+.pageOne {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 80vh;
+}
+.toptop {
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.toptop > button {
+  margin: 15px 40px;
+}
+.botbot > input, .botbot > button {
+  margin: 0 1rem;
+}
+.botbot > input {
+  padding: 0.5rem;
+  border: 0;
+  border-radius:10px;
+  /* font-family: 'Open Sans', sans-serif; */
+  font-size: 1.8rem;
+  font-weight: 600;
+  width: 20rem;
+}
+.bottombuttons > div {
+  margin: 10px;
+}
+
+
+.nextButton {
+  margin-top: 2rem;
+}
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+button:hover {
+  color: rgba(254, 251, 239, 0.95);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+input {
+  padding: 0.5rem;
+  border: 0;
+  border-radius:10px;
+  /* font-family: 'Open Sans', sans-serif; */
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 20rem;
+}
+
+a {
+  text-decoration: none;
+  color: red;
+}
+.inputPart {
+  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* border: solid 1px white; */
+}
+.enterButton3 {
+  margin-left: 3%;
+}
+.pageTwo {
+  display: flex;
+  flex-direction: column;
+}
+.nextDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-top: 2%; */
+  /* border: 1px solid white; */
+}
+.buttonsPart {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 0; */
+  color: rgba(254, 251, 239, 0.6);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  margin-top: 20px;
+  font-size: 30px;
+  /* letter-spacing: .3rem; */
+}
+
+.imageElement {
+  max-height: 60vh;
+}
+.addedDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid white; */
+  width: 30vw;
+}
+.pageOneGrid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  /* border: 1px solid white; */
+}
+
+.leftGrid > * {
+  margin: 25px 15px;
+}
+
+.rightGrid > * {
+  margin: 32.5px 0;
+}
+.rightGrid {
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: column;
+}
+.addedDiv div {
+  margin: 15px;
+}
+.deleteDiv {
+  font-size: 15px;
+}
+
+.learnmore {
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+}

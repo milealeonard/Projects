@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./stylesheetgrid.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="newIndex.js" charset="utf-8"></script>
+    <title>classifEye</title>
+  </head>
+  <body>
+    <div class="title">classifEye</div>
+
+
+    <div class="pageOne">
+      <div class="pageOneGrid">
+        <div class="leftGrid">
+          <div class="usernameClass">
+            <input type="text" class="usernameTag" placeholder="Step 1: Enter Username Here">
+            <button class="usernameEnter">Enter</button>
+          </div>
+          <div class="excelnameClass">
+            <input type="text" class= "excelnameTag" placeholder="Step 2: Enter Name of Excel File">
+            <button class="excelnameEnter">Enter</button>
+          </div>
+          <div class="step3">
+            <input type="file" multiple = "multiple" class="fileUpload" value="">
+            <button type="button" class="fakeButton">Step 3: Select Files to Classify</button>
+          </div>
+        </div>
+        <div class="rightGrid">
+          <div class="checkmark">
+            <img id = "checkmark1" src="https://images.vexels.com/media/users/3/157931/isolated/preview/604a0cadf94914c7ee6c6e552e9b4487-curved-check-mark-circle-icon-by-vexels.png" alt="">
+          </div>
+          <div class="checkmark">
+            <img id = "checkmark2" src="https://images.vexels.com/media/users/3/157931/isolated/preview/604a0cadf94914c7ee6c6e552e9b4487-curved-check-mark-circle-icon-by-vexels.png" alt="">
+          </div>
+          <div class="checkmark">
+            <img id = "checkmark3" src="https://images.vexels.com/media/users/3/157931/isolated/preview/604a0cadf94914c7ee6c6e552e9b4487-curved-check-mark-circle-icon-by-vexels.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="nextPage1">Next</button>
+      <div class="warnings">
+        <div class="error1">Please type your username in and press enter</div>
+        <div class="error2">Please enter the name of the final excel file</div>
+        <div class="error3">Please select your file database</div>
+      </div>
+    </div>
+
+
+    <div class="pageTwo">
+      <button type="button" class="prevButtonPage2To1">Previous Page</button>
+      <div class="inputPart">
+        <input type="text" placeholder = "Enter New Label Here" class="input2" value="">
+        <button type="button" class="enterButton2">Enter</button>
+      </div>
+      <div class="buttonsPart">
+      </div>
+      <div class="nextDiv">
+        <button type="button" class="nextPage2">Next</button>
+        <div class="warnings" id="errorPage2">
+          Please enter at least one label for classification!
+        </div>
+      </div>
+    </div>
+
+
+    <div class="pageThree">
+      <button type="button" class="prevButtonPage3To2">Previous Page</button>
+      <div class="buttons">
+      </div>
+      <div class="image">
+        <img class="imageElement" src="" alt="">
+        <div class="bottombuttons">
+          <div class="toptop">
+            <button type="button" class="previousButton3">Previous</button>
+            <button type="button" class="nextButton3">Next</button>
+          </div>
+          <div class="botbot">
+            <input type="text" class="elInput" placeholder="Type Here">
+            <button type="button" name="clear" class = "clearButton3">Clear</button>
+          <button type="button" name="Enter" class = "enterButton3">Enter</button>
+        </div>
+        </div>
+      </div>
+      <div class="downloadButton">
+        <button type="button" class="tabulate">Download Excel File</button>
+        <div class="error4Container">
+          <div class="warnings" id = "error4">
+            Please enter at least one classification before pressing enter!
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  </body>
+</html>
